@@ -1,0 +1,118 @@
+FoamFile
+{
+	version	2.0;
+	class	dictionary;
+	format	ascii;
+	location	"system";
+	object	snappyHexMeshDict;
+}
+castellatedMesh	true;
+snap	true;
+addLayers	true;
+geometry
+{
+	car1.stl
+	{
+		type	triSurfaceMesh;
+		simflowType	stl;
+		name	car1;
+		includedAngle	120.0;
+	}
+}
+castellatedMeshControls
+{
+	locationInMesh	(0.5 0.0 0.0);
+	refinementSurfaces
+	{
+		car1
+		{
+			level	( 6 6 );
+		}
+	}
+	refinementRegions
+	{
+	}
+	limitRegions
+	{
+	}
+	features	
+	(
+	{
+		file	"car1.eMesh";
+		levels	((0 0));
+	}
+	);
+	maxGlobalCells	10000000;
+	resolveFeatureAngle	30.0;
+	maxLoadUnbalance	0.1;
+	nCellsBetweenLevels	8;
+	gapLevelIncrement	0;
+	maxLocalCells	1000000;
+	minRefinementCells	10;
+	allowFreeStandingZoneFaces	true;
+}
+snapControls
+{
+	implicitFeatureSnap	true;
+	nSmoothPatch	3;
+	multiRegionFeatureSnap	true;
+	nFeatureSnapIter	10;
+	nFaceSplitInterval	5;
+	nSolveIter	500;
+	explicitFeatureSnap	true;
+	tolerance	1.0;
+	nRelaxIter	5;
+}
+addLayersControls
+{
+	layers
+	{
+		"car1*"
+		{
+			nSurfaceLayers 8;
+		}
+	}
+	nMedialAxisIter	100;
+	minThickness	1.0E-5;
+	nSmoothNormals	3;
+	maxThicknessToMedialRatio	0.1;
+	nSmoothThickness	10;
+	nSmoothSurfaceNormals	5;
+	slipFeatureAngle	70.0;
+	minMedianAxisAngle	90.0;
+	nRelaxIter	5;
+	nGrow	0;
+	nBufferCellsNoExtrude	0;
+	nRelaxedIter	20;
+	featureAngle	270.0;
+	maxFaceThicknessRatio	0.5;
+	nLayerIter	50;
+	relativeSizes	true;
+	firstLayerThickness	0.2;
+	expansionRatio	1.15;
+	meshShrinker	displacementMedialAxis;
+}
+meshQualityControls
+{
+	maxConcave	80.0;
+	maxBoundarySkewness	20.0;
+	minFaceWeight	0.05;
+	maxInternalSkewness	4.0;
+	minTwist	0.05;
+	maxNonOrtho	75.0;
+	minDeterminant	0.01;
+	minVolRatio	0.01;
+	nSmoothScale	4;
+	minTriangleTwist	-1.0;
+	minVol	1.0E-14;
+	minTetQuality	1.0E-20;
+	minArea	-1.0;
+	errorReduction	0.75;
+	relaxed
+	{
+		maxNonOrtho	75.0;
+	}
+}
+mergeTolerance	1.0E-6;
+debug	0;
+combinePatches	false;

@@ -1,0 +1,137 @@
+FoamFile
+{
+	version             2.0;
+	format              binary;
+	arch                "LSB;label=32;scalar=64";
+	class               dictionary;
+	location            "system";
+	object              changeDictionaryDict;
+}
+
+
+p
+{
+	boundaryField
+	{
+		boundaries
+		{
+			type	zeroGradient;
+		}
+		outlet
+		{
+			type	fixedValue;
+			value	uniform 0.0;
+		}
+		inlet
+		{
+			type	zeroGradient;
+		}
+		car1
+		{
+			type	zeroGradient;
+		}
+	}
+}
+
+
+U
+{
+	boundaryField
+	{
+		boundaries
+		{
+			type	slip;
+		}
+		outlet
+		{
+			type	pressureInletOutletVelocity;
+		}
+		inlet
+		{
+			type	surfaceNormalFixedValue;
+			refValue	uniform -14.0;
+		}
+		car1
+		{
+			type	noSlip;
+		}
+	}
+}
+
+
+k
+{
+	boundaryField
+	{
+		boundaries
+		{
+			type	zeroGradient;
+		}
+		outlet
+		{
+			type	inletOutlet;
+			inletValue	uniform 1.0;
+		}
+		inlet
+		{
+			type	turbulentIntensityKineticEnergyInlet;
+			intensity	5.0E-5;
+		}
+		car1
+		{
+			type	kqRWallFunction;
+		}
+	}
+}
+
+
+omega
+{
+	boundaryField
+	{
+		boundaries
+		{
+			type	zeroGradient;
+		}
+		outlet
+		{
+			type	inletOutlet;
+			inletValue	uniform 1.0;
+		}
+		inlet
+		{
+			type	turbulentMixingLengthFrequencyInlet;
+			mixingLength	1.0E-5;
+		}
+		car1
+		{
+			type	omegaWallFunction;
+		}
+	}
+}
+
+
+nut
+{
+	boundaryField
+	{
+		boundaries
+		{
+			type	calculated;
+		}
+		outlet
+		{
+			type	calculated;
+		}
+		inlet
+		{
+			type	calculated;
+		}
+		car1
+		{
+			type	nutUWallFunction;
+		}
+	}
+}
+
+

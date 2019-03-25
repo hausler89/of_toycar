@@ -1,0 +1,21 @@
+FoamFile
+{
+	version	2.0;
+	format	ascii;
+	class	dictionary;
+	location	"system";
+	object	createPatchDict;
+}
+pointSync	false;
+patches	
+(
+	{
+		name    car1;
+		patchInfo
+		{
+			type    patch;
+		}
+		constructFrom patches;
+		patches  (car1_default);
+	}
+);
